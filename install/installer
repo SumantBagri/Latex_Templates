@@ -14,7 +14,7 @@ failed_checkout() {
 }
 
 checkout() {
-  git -c advice.detachedHead=0 clone --branch "$2" --depth 1 "$1" INSTALL_DIR || failed_checkout "$1"
+  git -c advice.detachedHead=0 clone --branch "$2" --depth 1 "$1" ${INSTALL_DIR} || failed_checkout "$1"
 }
 
 if ! command -v git 1>/dev/null 2>&1; then
