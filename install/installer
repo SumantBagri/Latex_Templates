@@ -1,0 +1,41 @@
+#!/user/bin/env bash
+
+INSTALL_DIR=${HOME}
+
+colorize() {
+  if [ -t 1 ]; then printf "\e[%sm%s\e[m" "$1" "$2"
+  else echo -n "$2"
+  fi
+}
+
+failed_checkout() {
+  echo "Failed to git clone $1"
+  exit -1
+}
+
+checkout() {
+  git -c advice.detachedHead=0 clone --branch "$2" --depth 1 "$1" INSTALL_DIR || failed_checkout "$1"
+}
+
+if ! command -v git 1>/dev/null 2>&1; then
+  echo "init-latex: Git is not installed, can't continue." >&2
+  exit 1
+fi
+
+if [ -n "${USE_GIT_URI}" ]; then
+  GITHUB="git://github.com"
+else
+  GITHUB="https://github.com"
+fi
+
+checkout "${GITHUB}/SumantBagri/Latex_Templates.git"  "master"
+
+if ! command -v init-latex 1>/dev/null; then
+  { echo
+    colorize 1 "WARNING"
+    echo ": init-latex is not added to bashrc. Adding it now..."
+    echo
+  } >&2
+
+  echo "source ${HOME}/Latex_Templates/install/init-latex.sh" >> ${HOME}/.bashrc
+fi
