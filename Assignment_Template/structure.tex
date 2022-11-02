@@ -112,11 +112,24 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage{scrlayer-scrpage} % Required for customising headers and footers
+\KOMAoptions{headsepline}
 
-\ohead*{} % Right header
+\ohead*{\includegraphics[scale=0.1]{uoft.png}} % Right header
 \ihead*{} % Left header
 \chead*{} % Centre header
 
 \ofoot*{} % Right footer
 \ifoot*{} % Left footer
 \cfoot*{\pagemark} % Centre footer
+
+%----------------------------------------------------------------------------------------
+%   OTHER USEFUL PACKAGES
+%----------------------------------------------------------------------------------------
+
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
